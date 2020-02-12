@@ -3,14 +3,15 @@ import styled from 'styled-components';
 
 const Game = styled.div`
   width: 100%;
-  padding: 20px;
   max-width: 500px;
   margin: auto;
+  padding: 20px 0;
 `;
 
 const Scoreboard = styled.div`
   display: flex;
   align-items: stretch;
+  padding: 0 20px;
 `;
 
 const ScoreItem = styled.div`
@@ -20,6 +21,7 @@ const ScoreItem = styled.div`
 const QuestionBank = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 0 20px;
 `;
 
 const AnswerModal = styled.div`
@@ -81,6 +83,44 @@ const ClearButton = styled.button`
 
   &:focus {
     outline: none;
+  }
+`;
+
+const Footer = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0;
+  width: 100%;
+  height: 40px;
+  display: flex;
+`;
+
+const FooterButton = styled.button`
+  border-style: solid;
+  border-color: #bbb;
+  border-width: 1px 1px 1px 0;
+  background: #ddd;
+  color: #555;
+  height: 100%;
+  flex-grow: 1;
+  min-width: 50%;
+  box-style: border-box;
+  cursor: pointer;
+
+  &:first-child {
+    border-left-width: 1px;
+  }
+
+  &:hover {
+    background: #ccc;
+  }
+
+  &:disabled {
+    color: #bbb;
+    background: #eee;
+    cursor: not-allowed;
   }
 `;
 
@@ -182,19 +222,19 @@ export default class App extends React.Component {
           </AnswerModal>
         )}
 
-        <div>
-          <button onClick={this.resetButtonClick}>Reset</button>
+        <Footer>
+          <FooterButton onClick={this.resetButtonClick}>RESET</FooterButton>
           {this.state.round === 1 && (
-            <button
+            <FooterButton
               disabled={
                 (this.state.right.length + this.state.wrong.length + this.state.skipped.length) < 30
               }
               onClick={this.onNextRoundClick}
             >
-              Next Round
-            </button>
+              NEXT ROUND
+            </FooterButton>
           )}
-        </div>
+        </Footer>
       </Game>
     );
   };
